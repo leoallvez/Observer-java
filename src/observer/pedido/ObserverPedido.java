@@ -1,30 +1,58 @@
 package observer.pedido;
 
+import JFrame.Display;
+import JFrame.Pager;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import observer.pedido.classes.DisplayClass;
+import observer.pedido.classes.FilasPedido;
+import observer.pedido.classes.PagerClass;
+import observer.pedido.classes.Pedido;
 
 public class ObserverPedido {
 
     
+    @SuppressWarnings("empty-statement")
     public static void main(String[] args) {
+        List<Pedido> pedidosList = Arrays.asList(
+            new Pedido(1000, "Duplo Quarterão, Coca-cola, batata", "solicitado"),
+            new Pedido(1001, "McFritas Cheddar Bacon, batata", "solicitado"),
+            new Pedido(1002, "McFlurry e McShake Prestígio Mini", "solicitado"),
+            new Pedido(1003, "McFlurry KitKat Milk & White", "solicitado"),
+            new Pedido(1004, "Signature Quattro Formaggi, Coca-cola", "solicitado"),
+            new Pedido(1005, "Coca-cola, BIG TASTY", "solicitado")
+        );
         
-        List<String> listNames = Arrays.asList("Alice", "Bob", "Cole", "Dale", "Eric", "Frank");
-        Queue<String> queueNames = new LinkedList<>(listNames);
-        System.out.println(queueNames);
+        FilasPedido filaPedidos = new FilasPedido(pedidosList);
         
-        queueNames.add("Mary");
-        queueNames.add("John");
+        DisplayClass display = new DisplayClass();
+        PagerClass pager = new PagerClass();
         
-        System.out.println(queueNames);
-        
-        queueNames.poll(); //Pega o primeiro elemento
-        String teste = queueNames.peek();
-        
-        System.out.println("Eu sou o primeiro: "+ teste);
-        
-        System.out.println(queueNames);
+        filaPedidos.registrarObserver(display);
+        filaPedidos.registrarObserver(pager);
 
+        
+        JFrame f = new JFrame("Lista Pedidos");
+       
+        f.add(new JList(filaPedidos.toArray()));
+        f.pack();
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
+        
+        
+        Pager pagerJFrame = new  Pager();
+        pagerJFrame.setVisible(true);
+        pagerJFrame.setPagerClass(pager);
+        
+        
+        Display displayJFrame = new Display();
+        displayJFrame.setVisible(true);
+        displayJFrame.setFilasPedido(filaPedidos);
+        displayJFrame.setDiplayClass(display);
+  
+  
     } 
 }
