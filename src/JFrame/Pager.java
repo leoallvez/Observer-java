@@ -1,23 +1,23 @@
 package JFrame;
-import javax.swing.JTextPane;
 import observer.pedido.classes.PagerClass;
 
 public class Pager extends javax.swing.JFrame {
     
     private PagerClass pager;
     
+    public Pager() {
+        initComponents();   
+    }
+    
     public void setPagerClass(PagerClass pager) {
         this.pager = pager;
     }
     
-    private final JTextPane jTextPane2;
-
-    public Pager() {
-        initComponents();
-        this.jTextPane2 = jTextPane1;
+    public void updateSenha(){
+        jTextPane1.setText(Integer.toString(pager.getSenhaPedido()));
     }
-
-    @SuppressWarnings("unchecked")
+    
+  @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -32,7 +32,6 @@ public class Pager extends javax.swing.JFrame {
         jLabel1.setText("Pager");
 
         jTextPane1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextPane1.setText("teytefyterfeytre");
         jScrollPane1.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

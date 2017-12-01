@@ -5,6 +5,7 @@
  */
 package JFrame;
 
+import javax.swing.JFrame;
 import observer.pedido.classes.DisplayClass;
 import observer.pedido.classes.FilasPedido;
 
@@ -16,7 +17,8 @@ public class Display extends javax.swing.JFrame {
     
     private FilasPedido filaPedido;
     private DisplayClass display;
-    
+    private Pager pagerJFrame;
+    private FilaPedidos filaPedidosJFrame; 
     /**
      *
      * @param filaPedido
@@ -28,6 +30,15 @@ public class Display extends javax.swing.JFrame {
     public void setDiplayClass(DisplayClass display) {
         this.display = display;
     }
+    
+    public void setPagerJFrame(Pager pagerJFrame) {
+        this.pagerJFrame = pagerJFrame;
+    }
+    
+    public void setfilaPedidosJFrame(FilaPedidos filaPedidosJFrame) {
+        this.filaPedidosJFrame = filaPedidosJFrame;
+    }
+   
 
     public Display() {
         initComponents();   
@@ -52,13 +63,12 @@ public class Display extends javax.swing.JFrame {
 
         jTextPane1.setEditable(false);
         jTextPane1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextPane1.setText("testeHHHHHHHHHHHHHHHHH");
         jScrollPane1.setViewportView(jTextPane1);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel1.setText("Display");
 
-        jButton1.setText("Próximo");
+        jButton1.setText("Próximo pedido");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -71,12 +81,11 @@ public class Display extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +94,7 @@ public class Display extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -96,6 +105,10 @@ public class Display extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         filaPedido.proximoPedido();
         jTextPane1.setText(Integer.toString(display.getSenhaPedido()));
+         
+        this.pagerJFrame.updateSenha(); // **** added ****
+        this.pagerJFrame.repaint();
+        this.filaPedidosJFrame.updateLista();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

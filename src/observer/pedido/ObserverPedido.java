@@ -1,6 +1,8 @@
 package observer.pedido;
 
+import JFrame.Cadastro;
 import JFrame.Display;
+import JFrame.FilaPedidos;
 import JFrame.Pager;
 import java.util.Arrays;
 import java.util.List;
@@ -25,33 +27,37 @@ public class ObserverPedido {
             new Pedido(1005, "Coca-cola, BIG TASTY", "solicitado")
         );
         
-        FilasPedido filaPedidos = new FilasPedido(pedidosList);
-        
+           
         DisplayClass display = new DisplayClass();
         PagerClass pager = new PagerClass();
         
+        FilasPedido filaPedidos = new FilasPedido(pedidosList);   
         filaPedidos.registrarObserver(display);
         filaPedidos.registrarObserver(pager);
 
-        
-        JFrame f = new JFrame("Lista Pedidos");
-       
-        f.add(new JList(filaPedidos.toArray()));
-        f.pack();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
-        
-        
         Pager pagerJFrame = new  Pager();
         pagerJFrame.setVisible(true);
         pagerJFrame.setPagerClass(pager);
         
         
+        FilaPedidos filaPedidosJFrame = new FilaPedidos();
+        filaPedidosJFrame.setFilaPedido(filaPedidos); 
+        filaPedidosJFrame.setVisible(true);
+        
         Display displayJFrame = new Display();
         displayJFrame.setVisible(true);
         displayJFrame.setFilasPedido(filaPedidos);
         displayJFrame.setDiplayClass(display);
+        displayJFrame.setPagerJFrame(pagerJFrame);
+        displayJFrame.setfilaPedidosJFrame(filaPedidosJFrame);
+        displayJFrame.add(new JList(pedidosList.toArray()));
+        
+        
+        Cadastro cadastroJframe = new Cadastro();
+        cadastroJframe.setVisible(true);
+        cadastroJframe.setFilasPedido(filaPedidos);
+        cadastroJframe.setfilaPedidosJFrame(filaPedidosJFrame);
+        
   
   
     } 

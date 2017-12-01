@@ -22,8 +22,9 @@ public class FilasPedido {
     }
     
     public void proximoPedido() {
-        pedidoAtual =  pedidosFila.remove();
-        pedidoAtual.setStatusPedido("Servido");
+        pedidosFila.remove();
+        pedidoAtual =  pedidosFila.peek();
+        pedidoAtual.setStatusPedido("PRONTO");
         observers.stream().forEach((p) -> {
             p.update(pedidoAtual.getSenhaPedido());
         });
@@ -53,4 +54,10 @@ public class FilasPedido {
        
         return data;
     }
+
+    public Queue<Pedido> getPedidosFila() {
+        return pedidosFila;
+    }
+    
+    
 }
